@@ -22,9 +22,14 @@ The testing works
 
 1-. Install MariaDB database
 
+	https://bit.ly/3ii49i4
+
+
 2-. Import and configure the database:
 
-	2.1 Create the database 
+	2.1 Create the database
+	
+	name: sportevent 
 	
 	2.2 Use the configuration of the application.properties file
 	|
@@ -34,13 +39,19 @@ The testing works
 	password=1gradosuperior
 	server.port= 8050
 	
-   See example in the source Example. 
+   See example in the source example. 
    Files: capture-1.PNG and capture-2.PNG
 	
 
 	2.3 Source: The project's SportEventDB folder contains the SQL file to import.
 	
 3-. Once the database is created, you can import the project and execute it
+
+	Url: https://github.com/lgraul87/SportsBook/tree/Main
+	
+	Navigate to branch Main in GitHub
+	
+	You can download zip, extract and import the project.
 
    	Important: 
    	In SportsBookApplicationTests test class, 
@@ -49,13 +60,13 @@ The testing works
    	the database or the testing and build will fail ( because the object would not exist in the data base)
    
    	Uninstall the libary JAVA-11 and Install the default library in module path to fix warnings
-   	Disable project specific settings in Java Compiler configuration. Update and save and later enable again with
+   	Disable project specific settings in Java Compiler configuration. Update and save, and later enable again with
    	Compiler compliance level 11. Update and Save.
    
    	There should be no more warnings at this stage.
    
-   	See example in the source Example. 
-   	Capture-3.PNG Capture-4.PNG
+   	See example in the source example. 
+   	Files: capture-3.PNG capture-4.PNG
 
 	3.1 Build the Maven project: Run as --> Maven Build
 	
