@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import com.sportBook.model.SportEvent;
+import com.sportBook.repository.SportEventRepository;
 import com.sportBook.service.SportEventService;
 
 @SpringBootTest
@@ -15,6 +16,9 @@ public class SportsBookApplicationTests {
 
 	@Autowired
 	private SportEventService sportEventService;
+	
+	@Autowired
+	private SportEventRepository sportEventRepository;
 
 	final private int ID_SPORTEVENT_TO_ANALYSE = 1;
 
@@ -177,7 +181,7 @@ public class SportsBookApplicationTests {
 				sportEvent.getCollaborators(), sportEvent.getParticipants(), sportEvent.getLocation(),
 				sportEvent.getDate(), sportEvent.getTime());
 
-		this.sportEventService.addSportEvent(sportEventUpdated);
+		this.sportEventService.updateScoreSportEvent(sportEventUpdated, sportEventUpdated.getId());
 
 		SportEvent QuerySportEvent = this.sportEventService.getSportEventById(this.ID_SPORTEVENT_TO_ANALYSE);
 
@@ -198,11 +202,11 @@ public class SportsBookApplicationTests {
 		assertEquals(sportEventUpdated.getTime(), QuerySportEvent.getTime(),
 				"Compare time: QuerySportEvent vs sportEventUpdated");
 
-		sportEventUpdated = new SportEvent(sportEvent.getId(), sportEvent.getName(), previusScore,
+		SportEvent restoreSportEvent = new SportEvent(sportEvent.getId(), sportEvent.getName(), previusScore,
 				sportEvent.getCollaborators(), sportEvent.getParticipants(), sportEvent.getLocation(),
 				sportEvent.getDate(), sportEvent.getTime());
 
-		this.sportEventService.updateScoreSportEvent(sportEventUpdated, sportEvent.getId());
+		this.sportEventRepository.save(restoreSportEvent);
 
 	}
 
@@ -233,11 +237,13 @@ public class SportsBookApplicationTests {
 		assertEquals(sportEventUpdated.getTime(), QuerySportEvent.getTime(),
 				"Compare time: QuerySportEvent vs sportEventUpdated");
 
-		sportEventUpdated = new SportEvent(sportEvent.getId(), sportEvent.getName(), previusScore,
+		
+		SportEvent restoreSportEvent  = new SportEvent(sportEvent.getId(), sportEvent.getName(), previusScore,
 				sportEvent.getCollaborators(), sportEvent.getParticipants(), sportEvent.getLocation(),
 				sportEvent.getDate(), sportEvent.getTime());
 
-		this.sportEventService.updateScoreSportEvent(QuerySportEvent, sportEventUpdated.getId());
+		this.sportEventRepository.save(restoreSportEvent);
+		
 	}
 
 }
