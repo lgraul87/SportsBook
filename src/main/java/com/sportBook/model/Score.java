@@ -1,5 +1,6 @@
 package com.sportBook.model;
 
+// This object is only for return a JSON. Don't create table
 public class Score {
 
 	private Integer id;

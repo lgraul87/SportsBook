@@ -15,9 +15,7 @@ import com.sportBook.model.SportEvent;
 import com.sportBook.service.SportEventService;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:8050/SportsEvents")
 public class SportEventController {
-
 	private SportEventService sportEventService;
 
 	public SportEventController(SportEventService sportEventService) {
@@ -34,19 +32,23 @@ public class SportEventController {
 		return sportEventService.getSportEventById(id);
 	}
 
+	// task: implement one end point that return the score.
+	// This end point return a score's sport event when you wrote this url in
+	// browser for this GetMapping. The object Score is built with the id's sport
+	// event and one string with the score
 	@GetMapping("/SportsEvents/{id}/Score")
 	private Score getScoreOfSportEvent(@PathVariable("id") Integer id) {
-
 		return new Score(this.sportEventService.getSportEventById(id).getId(),
 				this.sportEventService.getSportEventById(id).getScore());
 	}
 
 	@PostMapping("/SportsEvents")
-	private Integer addSportEvent(@RequestBody SportEvent sportEvent) {
+	private void addSportEvent(@RequestBody SportEvent sportEvent) {
 		sportEventService.addSportEvent(sportEvent);
-		return sportEvent.getId();
 	}
 
+	// This end point can use a standard jpaRepository service or a custom service
+	// when it is intended to send a score and an id to update a sporting event.
 	@PutMapping("/SportsEvents/{id}")
 	public void updateSportEvent(@PathVariable("id") Integer id, @RequestBody SportEvent sportEvent) {
 
