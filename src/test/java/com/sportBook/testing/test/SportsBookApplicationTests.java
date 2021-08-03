@@ -213,15 +213,16 @@ public class SportsBookApplicationTests {
 				"Compare name: QuerySportEvent vs sportEventUpdated");
 		assertEquals(sportEventUpdated.getParticipants(), QuerySportEvent.getParticipants(),
 				"Compare participants: QuerySportEvent vs sportEventUpdated");
-		
+
 		// This assert check the valid update
 		assertEquals(sportEventUpdated.getScore(), QuerySportEvent.getScore(),
 				"Compare score: QuerySportEvent vs sportEventUpdated");
-		
+
 		assertEquals(sportEventUpdated.getTime(), QuerySportEvent.getTime(),
 				"Compare time: QuerySportEvent vs sportEventUpdated");
 
-		// Need to restore values because in testing the code execute as in programming in database
+		// Need to restore values because in testing the code execute as in programming
+		// in database
 		SportEvent restoreSportEvent = new SportEvent(sportEvent.getId(), sportEvent.getName(), previusScore,
 				sportEvent.getCollaborators(), sportEvent.getParticipants(), sportEvent.getLocation(),
 				sportEvent.getDate(), sportEvent.getTime());
@@ -252,21 +253,21 @@ public class SportsBookApplicationTests {
 				"Compare name: QuerySportEvent vs sportEventUpdated");
 		assertEquals(sportEventUpdated.getParticipants(), QuerySportEvent.getParticipants(),
 				"Compare participants: QuerySportEvent vs sportEventUpdated");
-		
+
 		// This assert check the invalid update
 		assertNotEquals(sportEventUpdated.getScore(), QuerySportEvent.getScore(),
 				"Compare score: QuerySportEvent vs sportEventUpdated");
-		
+
 		assertEquals(sportEventUpdated.getTime(), QuerySportEvent.getTime(),
 				"Compare time: QuerySportEvent vs sportEventUpdated");
 
-		// Need to restore values because in testing the code execute as in programming in database
+		// Need to restore values because in testing the code execute as in programming
+		// in database
 		SportEvent restoreSportEvent = new SportEvent(sportEvent.getId(), sportEvent.getName(), previusScore,
 				sportEvent.getCollaborators(), sportEvent.getParticipants(), sportEvent.getLocation(),
 				sportEvent.getDate(), sportEvent.getTime());
 
 		this.sportEventRepository.save(restoreSportEvent);
-
 	}
 
 	private int insertId(int id) {
