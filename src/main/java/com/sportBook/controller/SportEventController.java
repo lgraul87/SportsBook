@@ -23,32 +23,32 @@ public class SportEventController {
 	}
 
 	@GetMapping("/SportsEvents")
-	private List<SportEvent> getSportEvent() {
+	public List<SportEvent> getSportsEvents() {
 		return sportEventService.getSportsEvents();
 	}
 
 	@GetMapping("/SportsEvents/{id}")
-	private SportEvent getSportEventById(@PathVariable("id") Integer id) {
+	public SportEvent getSportEventById(@PathVariable("id") Integer id) {
 		return sportEventService.getSportEventById(id);
 	}
 
-	// task: implement one end point that return the score.
-	// This end point return a score's sport event when you wrote this url in
-	// browser for this GetMapping. The object Score is built with the id's sport
-	// event and one string with the score
+	// task: create an end point that returns the score.
+	// This end point returns a sport event's score when you write this url in the
+	// browser for this GetMapping. The object Score is built with the sport
+	// event's id and a string with the score    
 	@GetMapping("/SportsEvents/{id}/Score")
-	private Score getScoreOfSportEvent(@PathVariable("id") Integer id) {
+	public Score getScoreOfSportEvent(@PathVariable("id") Integer id) {
 		return new Score(this.sportEventService.getSportEventById(id).getId(),
 				this.sportEventService.getSportEventById(id).getScore());
 	}
 
 	@PostMapping("/SportsEvents")
-	private void addSportEvent(@RequestBody SportEvent sportEvent) {
+	public void addSportEvent(@RequestBody SportEvent sportEvent) {
 		sportEventService.addSportEvent(sportEvent);
 	}
 
 	// This end point can use a standard jpaRepository service or a custom service
-	// when it is intended to send a score and an id to update a sporting event.
+	// when it is intended to send a score and an id to update a sports event.
 	@PutMapping("/SportsEvents/{id}")
 	public void updateSportEvent(@PathVariable("id") Integer id, @RequestBody SportEvent sportEvent) {
 

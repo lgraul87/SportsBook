@@ -18,7 +18,7 @@ public class SportEvent implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(updatable = false, insertable = false, name = "id", nullable = false, length = 2)
+	@Column(updatable = false, insertable = false, name = "id", nullable = false, length = 2000)
 	private Integer id;
 
 	@Column(name = "name", nullable = false, length = 90)

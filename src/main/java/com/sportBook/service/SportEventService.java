@@ -2,11 +2,18 @@ package com.sportBook.service;
 
 import java.util.List;
 
+import javax.persistence.LockModeType;
+import javax.persistence.QueryHint;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Lock;
+import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.stereotype.Service;
 
 import com.sportBook.model.SportEvent;
 import com.sportBook.repository.SportEventRepository;
+
+
 
 @Service
 public class SportEventService {
@@ -19,6 +26,7 @@ public class SportEventService {
 
 	public List<SportEvent> getSportsEvents() {
 		return sportEventRepository.findAll();
+
 	}
 
 	public SportEvent getSportEventById(Integer id) {
@@ -29,44 +37,49 @@ public class SportEventService {
 		sportEventRepository.save(sportEvent);
 	}
 
+	@Lock(LockModeType.PESSIMISTIC_READ)
+	@QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value = "9000")})
 	public void updateSportEvent(SportEvent sportEvent, Integer id) {
 		sportEventRepository.save(sportEvent);
 	}
 
+	@Lock(LockModeType.PESSIMISTIC_READ)
+	@QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value = "9000")})
 	public void deleteSportEvent(Integer id) {
 		sportEventRepository.deleteById(id);
 	}
 
-	// Service customized: only update the score if get positive values.
-	// This method receives by parameters an edited sporting event and an id. The id
-	// is the same for the edited sporting event as it is for the unedited sporting
+	// Service customized: the score will be updated only if the received values are positive values.
+	// This method receives through parameters an edited sports event and an id. The id
+	// is the same for the edited sports event as it is for the unedited sports
 	// event
+	@Lock(LockModeType.PESSIMISTIC_READ)
 	public void updateScoreSportEvent(SportEvent sportEvent, Integer id) {
 
-		// Get at unedited sporting event previous to edit by id
+		// Get at unedited sports event previous to edit by id
 		SportEvent previousSportEvent = sportEventService.getSportEventById(id);
 
-		// Get previous score's sporting event for analyze
+		// Get previous sports event's score to analyze
 		String previousSportEventScore = previousSportEvent.getScore();
 
-		// Will be take the value from score and convert to numeric values
+		// The score values is then converted into numeric values
 		char score_A_previousSportEvent = previousSportEventScore.charAt(0);
 		int numericScore_A_previousSportEvent = Character.getNumericValue(score_A_previousSportEvent);
 
 		char score_B_previousSportEvent = previousSportEventScore.charAt(previousSportEventScore.length() - 1);
 		int numericScore_B_previousSportEvent = Character.getNumericValue(score_B_previousSportEvent);
 
-		// Get edited score's sporting event for analyze
+		// Get edited sports event's score to analyze
 		String CurrentScoreSportEvent = sportEvent.getScore();
 
-		// Will be take the value from score and convert to numeric values
+		// The score values is then converted into numeric values
 		char CurrentScore_A = CurrentScoreSportEvent.charAt(0);
 		int numericCurrentScore_A = Character.getNumericValue(CurrentScore_A);
 
 		char CurrentScore_B = CurrentScoreSportEvent.charAt(CurrentScoreSportEvent.length() - 1);
 		int numericCurrentScore_B = Character.getNumericValue(CurrentScore_B);
 
-		// Evaluate: Only can update the score if the score took positive value or
+		// Evaluate: It will update the score only if the score took positive value or
 		// values
 		if (numericScore_A_previousSportEvent <= numericCurrentScore_A
 				&& numericScore_B_previousSportEvent <= numericCurrentScore_B) {

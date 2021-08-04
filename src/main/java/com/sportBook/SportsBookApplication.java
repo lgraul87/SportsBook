@@ -56,15 +56,15 @@ public class SportsBookApplication {
  * 3-. Once the database is created, you can import the project and execute it
  * Url: https://github.com/lgraul87/SportsBook/tree/Main
  * 
- * Navigate to branch Main in GitHub
+ * Navigate to the main branch in GitHub
  * 
- * You can download zip, extract and import the project.
+ * You can download the zip, extract and import the project.
  * 
- * Important:In SportsBookApplicationTests test class,you will find the
+ * Important:In RepositoryTest test class,you will find the
  * following constant: final private int ID_SPORTEVENT_TO_ANALYSE = 1;the number
  * "1" is the id of the object SportEvent, so before running the application, it
- * must be created inthe database or the testing and build will fail ( because
- * the object would not exist in the data base)
+ * must be created in the database or the testing and build will fail ( because
+ * the object would not exist in the database)
  * 
  * Uninstall the libary JAVA-11 and Install the default library in module path
  * to fix warningsDisable project specific settings in Java Compiler
@@ -79,7 +79,7 @@ public class SportsBookApplication {
  * 3.2 Run the application: Run as --> Spring Boot App
  * 
  * 
- * 4-. The project works and has no problems? Let's go After opening the
+ * 4-. The project works and has no problems? Let's open the
  * database, right click on the project and run as Maven build. When the build
  * is finished, run the project as Spring Boot app.
  * 

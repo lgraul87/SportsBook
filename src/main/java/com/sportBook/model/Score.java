@@ -1,6 +1,6 @@
 package com.sportBook.model;
 
-// This object is only for return a JSON. Don't create table
+// This object is created with the purpose of returning a JSON. The table does not get created in the database.
 public class Score {
 
 	private Integer id;

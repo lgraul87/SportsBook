@@ -11,7 +11,14 @@ import com.sportBook.repository.SportEventRepository;
 import com.sportBook.service.SportEventService;
 
 @SpringBootTest
-public class SportsBookApplicationTests {
+public class UpdateServiceSportEventTest {
+
+	final int INCREASE_UNITS = 1;
+	final int INCREASE_SIMULTANEOUSLY_UNITS_A = 1;
+	final int INCREASE_SIMULTANEOUSLY_UNITS_B = 1;
+	final int DECREASE_UNITS = -2;
+	final int DECREASE_SIMULTANEOUSLY_UNITS_A = -2;
+	final int DECREASE_SIMULTANEOUSLY_UNITS_B = -2;
 
 	@Autowired
 	private SportEventService sportEventService;
@@ -20,28 +27,26 @@ public class SportsBookApplicationTests {
 	private SportEventRepository sportEventRepository;
 
 	// IMPORTANT
-	// The param's method 'insertId()' return a number. Must exist in database this
-	// id's sport event. Can not do testing with a sport event that no exist in
-	// database
-	final private int ID_SPORTEVENT_TO_ANALYSE = insertId(1);
+	// The param's method 'insertId()' returns a number.
+	// This sport event's id must exist in the database. The testing can not be
+	// completed with a sports event that doesn't exist in
+	// the database
+	private int ID_SPORTEVENT_TO_ANALYSE;
 
-	// You can added or decrease possibilities scores. range (0-9)
-	// The score marker only have place for a digit, then application's Front End
+	// You can add or decrease score possibilities. range (0-9)
+	// The score marker only has place for one digit, then application's Front End
 	// must restrict entry with 'input type number max = get score from api less 9'
 	// Example: Score: 5-5, range added only 4 || 9-5 = 4
-	// If added incorrect number, restore score in database
-	final int INCREASE_UNITS = 1;
-	final int INCREASE_SIMULTANEOUSLY_UNITS_A = 1;
-	final int INCREASE_SIMULTANEOUSLY_UNITS_B = 1;
-	final int DECREASE_UNITS = -2;
-	final int DECREASE_SIMULTANEOUSLY_UNITS_A = -2;
-	final int DECREASE_SIMULTANEOUSLY_UNITS_B = -2;
+	// If an incorrect number is added, it must be corrected directly from the
+	// database
 
-	// increaseScoreTeam_A_Testing try added possible positive score for Team A
+	// increaseScoreTeam_A_Testing tries to add possible positive score for Team A
 	@Test
 	public void increaseScoreTeam_A_Testing() throws Exception {
 
-		// Get a sport's event that exist in database
+		setID_SPORTEVENT_TO_ANALYSE(sportEventService.getSportsEvents().get(0).getId());
+
+		// Get a sports event that exists in the database
 		SportEvent sportEvent = this.sportEventService.getSportEventById(this.ID_SPORTEVENT_TO_ANALYSE);
 
 		// Get score and save in a String variable
@@ -54,14 +59,16 @@ public class SportsBookApplicationTests {
 		// Build new score with the constant INCREASE_UNITS for testing
 		String newUpdateScore = addUnitsToTeam_A(numericScore_A, numericScore_B, this.INCREASE_UNITS);
 
-		// Evaluate if can do the update
+		// Evaluate if the update can be done
 		responseAnalysisIncreaseScore(sportEvent, newUpdateScore, score);
 
 	}
 
-	// increaseScoreTeam_B_Testing try added possible positive score for Team B
+	// increaseScoreTeam_B_Testing try to add possible positive score for Team B
 	@Test
 	public void increaseScoreTeam_B_Testing() throws Exception {
+
+		setID_SPORTEVENT_TO_ANALYSE(sportEventService.getSportsEvents().get(0).getId());
 
 		SportEvent sportEvent = this.sportEventService.getSportEventById(this.ID_SPORTEVENT_TO_ANALYSE);
 
@@ -77,10 +84,13 @@ public class SportsBookApplicationTests {
 
 	}
 
-	// increaseScoreTeam_AB_Testing try added possible positive score for Team A and
+	// increaseScoreTeam_AB_Testing try to add possible positive score for Team A
+	// and
 	// B simultaneously
 	@Test
 	public void increaseScoreTeam_AB_Testing() throws Exception {
+
+		setID_SPORTEVENT_TO_ANALYSE(sportEventService.getSportsEvents().get(0).getId());
 
 		SportEvent sportEvent = this.sportEventService.getSportEventById(this.ID_SPORTEVENT_TO_ANALYSE);
 
@@ -97,10 +107,12 @@ public class SportsBookApplicationTests {
 
 	}
 
-	// decreaseScoreTeam_A_Testing shows that no units have been subtracted from the
-	// score's Team A
+	// decreaseScoreTeam_A_Testing shows that no units have been subtracted from
+	// Team A's score
 	@Test
 	public void decreaseScoreTeam_A_Testing() throws Exception {
+
+		setID_SPORTEVENT_TO_ANALYSE(sportEventService.getSportsEvents().get(0).getId());
 
 		SportEvent sportEvent = this.sportEventService.getSportEventById(this.ID_SPORTEVENT_TO_ANALYSE);
 
@@ -112,15 +124,17 @@ public class SportsBookApplicationTests {
 
 		String newUpdateScore = addUnitsToTeam_A(numericScore_A, numericScore_B, this.DECREASE_UNITS);
 
-		// Evaluate if can do the update
+		// Evaluate if the update can be done
 		responseAnalysisDecreaseScore(sportEvent, newUpdateScore, score);
 
 	}
 
-	// decreaseScoreTeam_B_Testing shows that no units have been subtracted from the
-	// score's Team B
+	// decreaseScoreTeam_B_Testing shows that no units have been subtracted from
+	// Team B's score
 	@Test
 	public void decreaseScoreTeam_B_Testing() throws Exception {
+
+		setID_SPORTEVENT_TO_ANALYSE(sportEventService.getSportsEvents().get(0).getId());
 
 		SportEvent sportEvent = this.sportEventService.getSportEventById(this.ID_SPORTEVENT_TO_ANALYSE);
 
@@ -137,9 +151,11 @@ public class SportsBookApplicationTests {
 	}
 
 	// decreaseScoreTeam_AB_Testing shows that no units have been subtracted from
-	// the score's Team A and B simultaneously
+	// Team A and Team B's score simultaneously
 	@Test
 	public void decreaseScoreTeam_AB_Testing() throws Exception {
+
+		setID_SPORTEVENT_TO_ANALYSE(sportEventService.getSportsEvents().get(0).getId());
 
 		SportEvent sportEvent = this.sportEventService.getSportEventById(this.ID_SPORTEVENT_TO_ANALYSE);
 
@@ -214,15 +230,15 @@ public class SportsBookApplicationTests {
 		assertEquals(sportEventUpdated.getParticipants(), QuerySportEvent.getParticipants(),
 				"Compare participants: QuerySportEvent vs sportEventUpdated");
 
-		// This assert check the valid update
+		// This assert checks the valid update
 		assertEquals(sportEventUpdated.getScore(), QuerySportEvent.getScore(),
 				"Compare score: QuerySportEvent vs sportEventUpdated");
 
 		assertEquals(sportEventUpdated.getTime(), QuerySportEvent.getTime(),
 				"Compare time: QuerySportEvent vs sportEventUpdated");
 
-		// Need to restore values because in testing the code execute as in programming
-		// in database
+		// restores the changes made upon the execution of the test class in the
+		// database
 		SportEvent restoreSportEvent = new SportEvent(sportEvent.getId(), sportEvent.getName(), previusScore,
 				sportEvent.getCollaborators(), sportEvent.getParticipants(), sportEvent.getLocation(),
 				sportEvent.getDate(), sportEvent.getTime());
@@ -254,15 +270,15 @@ public class SportsBookApplicationTests {
 		assertEquals(sportEventUpdated.getParticipants(), QuerySportEvent.getParticipants(),
 				"Compare participants: QuerySportEvent vs sportEventUpdated");
 
-		// This assert check the invalid update
+		// This assert checks the invalid update
 		assertNotEquals(sportEventUpdated.getScore(), QuerySportEvent.getScore(),
 				"Compare score: QuerySportEvent vs sportEventUpdated");
 
 		assertEquals(sportEventUpdated.getTime(), QuerySportEvent.getTime(),
 				"Compare time: QuerySportEvent vs sportEventUpdated");
 
-		// Need to restore values because in testing the code execute as in programming
-		// in database
+		// restores the changes made upon the execution of the test class in the
+		// database
 		SportEvent restoreSportEvent = new SportEvent(sportEvent.getId(), sportEvent.getName(), previusScore,
 				sportEvent.getCollaborators(), sportEvent.getParticipants(), sportEvent.getLocation(),
 				sportEvent.getDate(), sportEvent.getTime());
@@ -270,7 +286,8 @@ public class SportsBookApplicationTests {
 		this.sportEventRepository.save(restoreSportEvent);
 	}
 
-	private int insertId(int id) {
-		return id;
+	private void setID_SPORTEVENT_TO_ANALYSE(int iD_SPORTEVENT_TO_ANALYSE) {
+		this.ID_SPORTEVENT_TO_ANALYSE = iD_SPORTEVENT_TO_ANALYSE;
 	}
+
 }
