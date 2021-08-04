@@ -5,33 +5,46 @@ public class Score {
 
 	private Integer id;
 
-	private String score;
+	private int score_A;
+
+	private int score_B;
+
+	public Score(Integer id, int score_A, int score_B) {
+		setId(id);
+		setScore_A(score_A);
+		setScore_B(score_B);
+	}
 
 	public Score() {
 	}
 
-	public Score(int id, String score) {
-		setId(id);
-		setScore(score);
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	private void setId(Integer id) {
+	public void setId(Integer id) {
 		if (id != null) {
 			this.id = id;
 		}
 	}
 
-	public String getScore() {
-		return this.score;
+	public int getScore_A() {
+		return this.score_A;
 	}
 
-	private void setScore(String score) {
-		if (score != null && score.length() > 0) {
-			this.score = score;
+	public void setScore_A(Integer score_A) {
+		if (score_A != null) {
+			this.score_A = score_A;
+		}
+	}
+
+	public int getScore_B() {
+		return this.score_B;
+	}
+
+	public void setScore_B(Integer score_B) {
+		if (score_B != null) {
+			this.score_B = score_B;
 		}
 	}
 

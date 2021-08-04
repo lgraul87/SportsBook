@@ -24,8 +24,11 @@ public class SportEvent implements Serializable {
 	@Column(name = "name", nullable = false, length = 90)
 	private String name;
 
-	@Column(name = "score", nullable = false)
-	private String score;
+	@Column(name = "scorea", nullable = false)
+	private int scorea;
+
+	@Column(name = "scoreb", nullable = false)
+	private int scoreb;
 
 	@Column(name = "collaborators", nullable = false, length = 90)
 	private String collaborators;
@@ -42,24 +45,18 @@ public class SportEvent implements Serializable {
 	@Column(name = "time", nullable = false, length = 90)
 	private String time;
 
-	public SportEvent(Integer id, String name, String score, String collaborators, String participants, String location,
-			Date date, String time) {
+	public SportEvent(Integer id, String name, Integer score_team_A, Integer score_team_B, String collaborators,
+			String participants, String location, Date date, String time) {
 
 		setId(id);
 		setName(name);
-		setScore(score);
+		setScorea(score_team_A);
+		setScoreb(score_team_B);
 		setCollaborators(collaborators);
 		setParticipants(participants);
 		setLocation(location);
 		setDate(date);
 		setTime(time);
-
-	}
-
-	public SportEvent(Integer id, String score) {
-
-		setId(id);
-		setScore(score);
 	}
 
 	public SportEvent() {
@@ -69,104 +66,86 @@ public class SportEvent implements Serializable {
 		return this.id;
 	}
 
-	private boolean setId(Integer id) {
-		boolean valid = false;
+	private void setId(Integer id) {
 		if (id != null && id > 0) {
-			valid = true;
 			this.id = id;
 		}
-		return valid;
 	}
 
 	public String getName() {
 		return this.name;
 	}
 
-	private boolean setName(String name) {
-		boolean valid = false;
+	private void setName(String name) {
 		if (name != null && name.length() > 0) {
-			valid = true;
 			this.name = name;
 		}
-		return valid;
 	}
 
-	public String getScore() {
-		return this.score;
+	public int getScorea() {
+		return scorea;
 	}
 
-	private boolean setScore(String score) {
-		boolean valid = false;
-		if (score != null && score.length() > 0) {
-			valid = true;
-			this.score = score;
-		}
-		return valid;
+	public void setScorea(int scorea) {
+		this.scorea = scorea;
+	}
+
+	public int getScoreb() {
+		return scoreb;
+	}
+
+	public void setScoreb(int scoreb) {
+		this.scoreb = scoreb;
 	}
 
 	public String getCollaborators() {
 		return this.collaborators;
 	}
 
-	private boolean setCollaborators(String collaborators) {
-		boolean valid = false;
+	private void setCollaborators(String collaborators) {
 		if (collaborators != null && collaborators.length() > 0) {
-			valid = true;
 			this.collaborators = collaborators;
 		}
-		return valid;
 	}
 
 	public String getParticipants() {
 		return this.participants;
 	}
 
-	private boolean setParticipants(String participants) {
-		boolean valid = false;
+	private void setParticipants(String participants) {
 		if (participants != null && participants.length() > 0) {
-			valid = true;
 			this.participants = participants;
 		}
-		return valid;
 	}
 
 	public String getLocation() {
 		return this.location;
 	}
 
-	private boolean setLocation(String location) {
-		boolean valid = false;
+	private void setLocation(String location) {
 		if (location != null && location.length() > 0) {
-			valid = true;
 			this.location = location;
 		}
-		return valid;
 	}
 
 	public Date getDate() {
 		return this.date;
 	}
 
-	private boolean setDate(Date date) {
-		boolean valid = false;
+	private void setDate(Date date) {
 		if (date != null) {
-			valid = true;
 			this.date = date;
 		}
-		return valid;
 	}
 
 	public String getTime() {
 		return this.time;
 	}
 
-	private boolean setTime(String time) {
-		boolean valid = false;
+	private void setTime(String time) {
 		if (time != null && time.length() > 0) {
-			valid = true;
 			this.time = time;
 		}
-		return valid;
 	}
 
 }

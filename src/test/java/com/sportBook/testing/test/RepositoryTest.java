@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.sportBook.SportsBookApplication;
 import com.sportBook.controller.SportEventController;
+import com.sportBook.model.Score;
 import com.sportBook.model.SportEvent;
 import com.sportBook.service.SportEventService;
 
@@ -23,7 +25,28 @@ public class RepositoryTest {
 	public void getSportsEventsTest() throws Exception {
 		initDB();
 		sportEventController.getSportsEvents();
+	}
 
+	//Testing all method of the project
+	@Test
+	public void main() {
+		String[] arguments = { "1", "2", "3" };
+		SportsBookApplication.main(arguments);
+	}
+
+	@Test
+	public void getScoreOfSportEvent() {
+		sportEventController.getScoreOfSportEvent(sportEventService.getSportsEvents().get(0).getId());
+	}
+
+	@Test
+	public void newScore() {
+		new Score();
+	}
+
+	@Test
+	public void getId() {
+		new Score().getId();
 	}
 
 	@Test
@@ -31,15 +54,6 @@ public class RepositoryTest {
 		SportEvent sportEvent = sportEventController
 				.getSportEventById(sportEventService.getSportsEvents().get(0).getId());
 		return sportEvent.getId();
-
-	}
-
-	@Test
-	public Integer getScoreOfSportEventTest() throws Exception {
-
-		int id = getSportEventByIdTest();
-		sportEventController.getScoreOfSportEvent(1);
-		return id;
 
 	}
 
@@ -62,7 +76,7 @@ public class RepositoryTest {
 
 	@Test
 	public void deleteSportEventTest() throws Exception {
-		SportEvent sportEvent = new SportEvent(1, "Team A vs Team B", "1-0", "Team A", "participants", "Madrid",
+		SportEvent sportEvent = new SportEvent(1, "Team A vs Team B", 1, 0, "Team A", "participants", "Madrid",
 				new Date(), "17:00pm to 18:30pm ");
 		sportEventController.addSportEvent(sportEvent);
 		int id = getSportEventByIdTest();
@@ -71,11 +85,13 @@ public class RepositoryTest {
 
 	}
 
+	// This initDB (method) evaluate if the table 'sportevent' is empty. When is
+	// empty, push a new sportevent. When isnt empty do nothing
 	public void initDB() throws Exception {
 		if (sportEventService.getSportsEvents().size() < 1) {
-			SportEvent sportEvent = new SportEvent(1, "Team A vs Team B", "1-0", "Team A", "participants", "Madrid",
+			SportEvent sportEvent = new SportEvent(1, "Team A vs Team B", 1, 0, "Team A", "participants", "Madrid",
 					new Date(), "17:00pm to 18:30pm ");
-			sportEventController.addSportEvent(sportEvent);
+			sportEventService.addSportEvent(sportEvent);
 		}
 	}
 }
