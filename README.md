@@ -45,7 +45,7 @@ Url: https://github.com/lgraul87/SportsBook/tree/Main
 		
 You can download zip, extract and import the project.
    
-Uninstall the libary JAVA-11 and Install the default library in module path to fix warnings
+Uninstall the library JAVA-11 and Install the default library in module path to fix warnings
 Disable project specific settings in Java Compiler configuration. Update and save, and later enable again with
 Compiler compliance level 11. Update and Save.
    
@@ -54,7 +54,7 @@ There should be no more warnings at this stage.
 See example in the source example. 
 Files: capture-3.PNG capture-4.PNG
 
-# 3.1 Build the Maven project: Run as --> Maven Build or Coverage as for look the results of test (99 until 100 porcent)
+# 3.1 Build the Maven project: Run as --> Maven Build or Coverage as for look the results of test (99 until 100 percent)
 
 After opening the database, right click on the project and run as Maven build.
 When the build is finished, run the project as Spring Boot app.
