@@ -46,7 +46,7 @@ public class SportEventController {
 		sportEventService.addSportEvent(sportEvent);
 	}
 
-	// This end point only update a new positive score
+	// This end point only updates a new positive score
 	// when it is intended to send a score and an id to update a sports event.
 	@PutMapping("/SportsEvents/{id}")
 	public void updateSportEvent(@PathVariable("id") Integer id, @RequestBody SportEvent sportEvent) {

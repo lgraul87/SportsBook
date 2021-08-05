@@ -27,7 +27,7 @@ public class RepositoryTest {
 		sportEventController.getSportsEvents();
 	}
 
-	//Testing all method of the project
+	//Testing all the methods of the project
 	@Test
 	public void main() {
 		String[] arguments = { "1", "2", "3" };
@@ -85,8 +85,8 @@ public class RepositoryTest {
 
 	}
 
-	// This initDB (method) evaluate if the table 'sportevent' is empty. When is
-	// empty, push a new sportevent. When isnt empty do nothing
+	// This initDB (method) evaluates if the table 'sportevent' is empty. When its
+	// empty, it pushes a new sports event. When it is not empty it doesn't do anything
 	public void initDB() throws Exception {
 		if (sportEventService.getSportsEvents().size() < 1) {
 			SportEvent sportEvent = new SportEvent(1, "Team A vs Team B", 1, 0, "Team A", "participants", "Madrid",

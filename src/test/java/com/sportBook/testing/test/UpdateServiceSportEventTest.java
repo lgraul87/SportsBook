@@ -82,8 +82,7 @@ public class UpdateServiceSportEventTest {
 	}
 
 	// increaseScoreTeam_AB_Testing try to add possible positive score for Team A
-	// and
-	// B simultaneously
+	// and B simultaneously
 	@Test
 	public void increaseScoreTeam_AB_Testing() throws Exception {
 
@@ -183,14 +182,14 @@ public class UpdateServiceSportEventTest {
 		return new Score(id, (numericScore_A + units), numericScore_B);
 	}
 
-	// Build new score with the constant INCREASE_UNITS or DECREASE_UNITSfor testing
+	// Build new score with the constant INCREASE_UNITS or DECREASE_UNITS for testing
 	private Score addUnitsToTeam_B(int id, int numericScore_A, int numericScore_B, int units) {
 		return new Score(id, numericScore_A, (numericScore_B + units));
 	}
 
 	// Build new score with the constant INCREASE_SIMULTANEOUSLY_UNITS_A &
 	// INCREASE_SIMULTANEOUSLY_UNITS_B or DECREASE_SIMULTANEOUSLY_UNITS_A &
-	// DECREASE_SIMULTANEOUSLY_UNITS_Bfor testing
+	// DECREASE_SIMULTANEOUSLY_UNITS_B for testing
 	private Score addUnitsToTeam_AB(int id, int numericScore_A, int numericScore_B, int simultaneouslyUnits_A,
 			int simultaneouslyUnits_B) {
 		return new Score(id, (numericScore_A + simultaneouslyUnits_A), (numericScore_B + simultaneouslyUnits_B));
@@ -361,13 +360,13 @@ public class UpdateServiceSportEventTest {
 		this.sportEventRepository.save(restoreSportEvent);
 	}
 
-	// This method set a valid value found for this attribute
+	// This method sets a valid value found for this attribute
 	private void setID_SPORTEVENT_TO_ANALYSE(int iD_SPORTEVENT_TO_ANALYSE) {
 		this.ID_SPORTEVENT_TO_ANALYSE = iD_SPORTEVENT_TO_ANALYSE;
 	}
 
-	// This initDB (method) evaluate if the table 'sportevent' is empty. When is
-	// empty, push a new sportevent. When isnt empty do nothing
+	// This initDB (method) evaluates if the table 'sportevent' is empty. When it's
+	// empty, it pushes a new sportevent. When it isn't empty it doesn't do anything
 	public void initDB() throws Exception {
 		if (sportEventService.getSportsEvents().size() < 1) {
 			SportEvent sportEvent = new SportEvent(1, "Team A vs Team B", 1, 0, "Team A", "participants", "Madrid",

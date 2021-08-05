@@ -40,8 +40,8 @@ public class SportEventService {
 
 	// Service customized: the score will be updated only if the received values are
 	// positive values.This method receives through parameters an edited sports
-	// event and an id. The
-	// id is the same for the edited sports event as it is for the unedited sports
+	// event and an id.
+	// The id is the same for the edited sports event as it is for the unedited sports
 	// event
 	public void updateScoreSportEvent(SportEvent sportEvent, Integer id) {
 
